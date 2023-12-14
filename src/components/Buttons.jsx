@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom"
 
-export function AuthButton({text = '', onClick}) {
+export function Button({text = '', onClick, isWhite = true}) {
+    const style = {
+        color: isWhite ? "#fff" : "#2e2e2e",
+        fontFamily: 'Urbanist'
+    }
     return (
         <>
             <button
-                className="text-white text-center text-xl font-bold whitespace-nowrap 
+                className="text-center text-xl font-bold whitespace-nowrap 
                     justify-center items-center bg-purple-300 max-w-full mt-7 px-16 py-4 rounded-md max-md:px-5"
-                style={{fontFamily: 'Urbanist'}}
+                style={style}
                 onClick={onClick}
             >{ text } </button>
         </>

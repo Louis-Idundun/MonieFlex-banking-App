@@ -3,7 +3,7 @@ import { useState } from "react";
 import OnboardingHeader from "../../components/headers/OnboardingHeader"
 import AuthFormField from "../../components/formfields/AuthFormField"
 import PasswordFormField from '../../components/formfields/PasswordFormField'
-import { AuthButton, AuthLinkButton } from "../../components/buttons/AuthButton";
+import { Button, AuthLinkButton } from "../../components/Buttons";
 import { Link } from "react-router-dom";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes";
@@ -73,7 +73,7 @@ function LoginPage() {
                                 <span className="text-neutral-400"> and </span>
                                 <span className="text-sky-950">Privacy Policy</span>
                             </p>
-                            <AuthButton text="Login"/>
+                            <Button text="Login"/>
                             <AuthLinkButton 
                                 isPurple={ false } 
                                 title="Open a MonieFlex Bank Account" 

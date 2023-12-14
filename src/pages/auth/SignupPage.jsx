@@ -3,7 +3,7 @@ import { useState } from "react";
 import OnboardingHeader from "../../components/headers/OnboardingHeader"
 import AuthFormField from "../../components/formfields/AuthFormField"
 import PasswordFormField from '../../components/formfields/PasswordFormField'
-import { AuthButton, AuthLinkButton } from "../../components/buttons/AuthButton";
+import { Button, AuthLinkButton } from "../../components/Buttons";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes"
 
@@ -86,7 +86,7 @@ function SignupPage() {
                     onToggle={handleConfirmToggle}
                     onValueChanged={() => {}}
                 />
-                <AuthButton text="Signup"/>
+                <Button text="Sign Up"/>
                 <AuthLinkButton 
                     isPurple={ true } 
                     title="I have a MonieFlex Account." 
