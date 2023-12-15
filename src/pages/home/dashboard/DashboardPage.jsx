@@ -4,8 +4,11 @@ import { QuickTransactions } from "./DashboardContents"
 import AccountBalance from "../../../components/AccountBalance"
 import TransactionHistory from "./TransactionHistory"
 import DashboardChart from "./DashboardChart"
+import Title from '../../../commons/Title'
 
 function DashboardPage() {
+    Title("MonieFlex - Dashboard")
+
     return (
         <div style={{
             display: "grid",
