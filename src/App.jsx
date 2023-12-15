@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {SnackbarProvider} from "notistack";
+import OurRoutes from "./commons/OurRoutes";
+import TransferPage from  "./pages/home/transfer/TransferPage"
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
           <SnackbarProvider />
           <BrowserRouter>
               <Routes>
-                  /// TODO::: Add pages with their routes
+                  <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
               </Routes>
           </BrowserRouter>
       </>
