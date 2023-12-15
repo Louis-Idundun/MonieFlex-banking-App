@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MonieFlex",
+  "name": "MonieFlex - Bank with ease",
   "icons": [
     {
-      "src": "flogo.png",
+      "src": "logo.png",
       "type": "image/png"
     },
     {
@@ -17,6 +17,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#08284E",
+  "background_color": "#CFB1FE"
 }
