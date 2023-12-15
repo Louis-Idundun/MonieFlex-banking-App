@@ -21,7 +21,6 @@ function TextFormField({
             required={ required }
             disabled={ !isEnabled }
             onChange={e => {
-                console.log(e.target.value)
                 onValueChanged(e.target.value)
             }}
         />
