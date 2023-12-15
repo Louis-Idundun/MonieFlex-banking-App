@@ -3,6 +3,7 @@ import TextFormField from "../../../components/formfields/TextFormField"
 import DropdownField from "../../../components/formfields/DropdownField"
 import NarrationFormField from "../../../components/formfields/NarrationFormField"
 import { Button } from "../../../components/Buttons"
+import Checkbox from "../../../commons/Checkbox"
 
 
 export const MonieFlexTransferForm = () => {
@@ -23,6 +24,7 @@ export const MonieFlexTransferForm = () => {
                 type={"text"}
                 placeHolder={"Receiver's Account Name"}
             />
+            <Checkbox label={"Save Beneficiary"} onValueChanged={e => {console.log(e)}} />
             <TextFormField
                 id={'amount'}
                 type={"number"}
@@ -30,8 +32,16 @@ export const MonieFlexTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField />
-            <Button text={ "Send Money" }/>
+            <NarrationFormField 
+                id="MonieFlex" 
+                placeHolder="Description" 
+            />
+            <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
+                <Button 
+                    text={ "Send Money" } 
+                    isWhite={ false }
+                />
+            </div>
         </div>
     )
 }
@@ -70,8 +80,16 @@ export const OtherBanksTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField />
-            <Button text={ "Send Money" }/>
+            <NarrationFormField 
+                id="Other Banks" 
+                placeHolder="Description"
+            />
+            <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
+                <Button 
+                    text={ "Send Money" } 
+                    isWhite={ false }
+                />
+            </div>
         </div>
     )
 }

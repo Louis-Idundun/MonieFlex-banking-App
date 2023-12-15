@@ -20,7 +20,9 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
 
     const hoverStyle = {
         backgroundColor: "#eff",
-        borderRadius: "5px"
+        borderRadius: "5px",
+        fontSize: "14px", 
+        fontWeight: "500"
     }
 
     return (
@@ -29,7 +31,8 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
                 onClick={handleOpenList}
                 className="font-urbanist my-[20px] flex justify-between top-9 min-w-full left-0 bg-[#EDEDED]
                 mt-1 z-10 px-4 py-4 border-[#5A5959] rounded-md focus:outline-none focus:border-blue-500
-                cursor-pointer"
+                cursor-pointer items-center"
+                style={{border: "#5a5959 solid 1px", fontSize: "16px", fontWeight: "600"}}
             > { text }
                 <div className={`${open ? 'rotate-180' : ''} flex`}>
                     <Icon icon="lucide:chevron-down" width="24" height="24" />
@@ -45,8 +48,8 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
                             key={key}
                             onMouseEnter={() => handleHover(key)}
                             onClick={() => handleSelect(item)}
-                            className="font-urbanist top-9 min-w-full left-0 z-10 px-4 py-4"
-                            style={index === key  ? hoverStyle : null}
+                            className="font-urbanist top-9 min-w-full left-0 z-10 px-4 py-2"
+                            style={index === key  ? hoverStyle : { fontSize: "14px", fontWeight: "500" }}
                         >{item}</div>
                     })
                 }</div> : <div></div>

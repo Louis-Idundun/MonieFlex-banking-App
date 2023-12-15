@@ -34,7 +34,7 @@ function SideHistory({title = '', history = [{firstName: '', lastName: '', accou
                     { title.toUpperCase() }
                 </div>
                 <div className="flex gap-5 items-center">
-                    <div className={`${open ? "rotate-180" : ""}`} onClick={handleClick}>
+                    <div className={`${open ? "rotate-180" : ""}`} onClick={handleClick} style={{ cursor: "pointer" }}>
                         <Icon icon="iconamoon:arrow-up-2-light" height={"20px"} width={'20px'}/>
                     </div>
                     <Icon icon="solar:settings-bold-duotone" height={"20px"} width={'20px'}/>

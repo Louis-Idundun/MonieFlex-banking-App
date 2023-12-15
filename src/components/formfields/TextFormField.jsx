@@ -17,7 +17,7 @@ function TextFormField({
                 ${isEnabled ? 'bg-[#EDEDED]' : 'bg-[#B5B5B5]'}
                 mt-1 z-10 px-4 py-4 rounded-md focus:outline-none focus:border-blue-500`
             }
-            style={{ border: "#5a5959 solid 1px" }}
+            style={{ border: "#5a5959 solid 1px", fontSize: "16px", fontWeight: "600" }}
             placeholder= { placeHolder }
             required={ required }
             disabled={ !isEnabled }
