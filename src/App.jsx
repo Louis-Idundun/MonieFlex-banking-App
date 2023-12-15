@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {SnackbarProvider} from "notistack";
+import OurRoutes from "./commons/OurRoutes";
+import DashboardPage from "./pages/home/dashboard/DashboardPage"
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
           <SnackbarProvider />
           <BrowserRouter>
               <Routes>
-                  /// TODO::: Add pages with their routes
+                  <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
               </Routes>
           </BrowserRouter>
       </>
