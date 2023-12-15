@@ -17,7 +17,7 @@ const OurRoutes = {
     login: "/auth/login",
 
     resetPassword: "/auth/reset-password",
-    checkEmail: "/auth/check-email",
+    forgotPassword: "/auth/forgot-password",
 }
 
 export default OurRoutes;

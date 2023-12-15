@@ -3,6 +3,7 @@ import TextFormField from "../../../components/formfields/TextFormField"
 import DropdownField from "../../../components/formfields/DropdownField"
 import NarrationFormField from "../../../components/formfields/NarrationFormField"
 import { Button } from "../../../components/Buttons"
+import Checkbox from "../../../commons/Checkbox"
 
 
 export const AirtimeForm = () => {
@@ -13,19 +14,23 @@ export const AirtimeForm = () => {
     }
 
     return (
-        <div style={{ paddingTop: "20px" }}>
+        <div>
+            <p style={{ paddingBottom: "20px", fontSize: "20px", fontWeight: "bold" }}>Airtime Purchases</p>
+            <DropdownField
+                placeHolder={"Select Network"}
+                list={[
+                    "MTN",
+                    "GLO",
+                    "AIRTEL",
+                    "9MOBILE"
+                ]}
+                onSelected={item => console.log(item)}
+            />
             <TextFormField
-                id={'receiver_number'}
+                id={'mobile_number'}
                 type={"number"}
-                placeHolder={"Receiver's Account Number"}
+                placeHolder={"Mobile Number"}
             />
-
-            <TextFormField
-                id={'receiver_name'}
-                type={"text"}
-                placeHolder={"Receiver's Account Name"}
-            />
-
             <TextFormField
                 id={'amount'}
                 type={"number"}
@@ -33,6 +38,12 @@ export const AirtimeForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
+            <TextFormField
+                id={'beneficiary'}
+                type={"text"}
+                placeHolder={"Beneficiary Name"}
+            />
+            <Checkbox label="Save Beneficiary" onValueChanged={e => {}}/>
             <NarrationFormField 
                 id="MonieFlex" 
                 placeHolder="Description" 

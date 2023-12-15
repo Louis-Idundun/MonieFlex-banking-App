@@ -14,7 +14,10 @@ function AccountBalance({accountBalance = 0, accountNumber = ''}) {
     }
 
     return (
-        <div className="items-stretch border bg-violet-50 flex flex-col px-6 py-8 rounded-xl border-solid border-rose-50">
+        <div 
+            className="items-stretch border bg-violet-50 flex flex-col px-6 py-8 rounded-xl border-solid border-rose-50"
+            style={{ width: "400px" }}
+        >
             <div className="justify-between items-center flex gap-5">
                 <div className="text-neutral-400 text-left text-xs font-semibold tracking-wider uppercase grow whitespace-nowrap my-auto">
                     Current Account Balance
@@ -24,8 +27,8 @@ function AccountBalance({accountBalance = 0, accountNumber = ''}) {
             <div className="items-stretch flex justify-between gap-5 mt-5">
                 <div className="flex items-center">
                     <Icon icon="mdi:naira" width="32px" height="32px"/>
-                    <div className="text-zinc-800 text-left text-4xl font-bold tracking-[3.6px] grow whitespace-nowrap">{
-                        balanceHidden ? "***************" : new Intl.NumberFormat().format(accountBalance)
+                    <div className="text-zinc-800 text-left text-4xl font-bold tracking-[3.6px] whitespace-nowrap">{
+                        balanceHidden ? "*************" : new Intl.NumberFormat().format(accountBalance)
                     } </div>
                 </div>
                 <div

@@ -17,16 +17,18 @@ const HistoryItem = ({
                 : null 
             }
             {
-                isFlexed ? <div className="justify-center items-stretch self-stretch flex grow basis-[0%] flex-col">
+                isFlexed ? <div className="justify-between items-center self-stretch flex grow">
+                    <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
+                        { accountNumber }
+                    </div>
+                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap" style={{color: "#08284E"}}>
+                        { firstName }
+                    </div>
+                </div> : <div className="justify-center items-stretch self-stretch flex grow basis-[0%] flex-col">
                     <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
                         {firstName} {lastName}
                     </div>
                     <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{accountNumber}</div>
-                </div> : <div className="justify-center items-stretch self-stretch flex grow basis-[0%]">
-                    <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
-                        { firstName }
-                    </div>
-                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{ lastName }</div>
                 </div>
             }
         </div>
@@ -34,7 +36,7 @@ const HistoryItem = ({
 }
 
 function SideHistory({
-    title = '', needAvatar = false, isFlexed = false,
+    title = '', needAvatar = true, isFlexed = false,
     history = [{firstName: '', lastName: '', accountNumber: 3197080844}]
 }) {
     const [ open, setOpen ] = useState(false)

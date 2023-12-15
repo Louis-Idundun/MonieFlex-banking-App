@@ -10,8 +10,14 @@ function AirtimePage() {
  
     const history = [
       {
-        firstName: "Evaristus",
-        lastName: "Adimonyemma"
+        accountNumber: "08033208400",
+        firstName: "Adimonyemma",
+        lastName: "Evaristus"
+      },
+      {
+        accountNumber: "08033208400",
+        firstName: "Adimonyemma",
+        lastName: "Evaristus"
       }
     ]
  
@@ -32,19 +38,15 @@ function AirtimePage() {
               gridTemplateColumns: "1fr auto",
               padding: "50px"
             }}>
-              <div style={{ marginRight: "40px" }}>
-                <div className="border px-4 py-12 rounded-xl border-solid border-sky-950 flex justify-between">
-                  <AirtimeForm />
-                </div>
-                <div style={{ marginRight: "30px" }}>
-                    <AccountBalance />
-                    <SideHistory 
-                      title={ "Frequent Beneficiaries" } 
-                      history={ history }
-                      isFlexed={ true }
-                    />
-                </div>
-              </div>
+              <AirtimeForm />
+              <div style={{ marginRight: "30px", marginLeft: "40px" }}>
+                <AccountBalance />
+                <SideHistory 
+                  title={ "Frequent Beneficiaries" } 
+                  history={ history }
+                  isFlexed={ true }
+                />
+            </div>
           </div>
         </div>
       </div>
