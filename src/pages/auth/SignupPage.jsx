@@ -6,6 +6,7 @@ import PasswordFormField from '../../components/formfields/PasswordFormField'
 import { Button, AuthLinkButton } from "../../components/Buttons";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes"
+import Title from "../../commons/Title"
 
 function SignupPage() {
   const [password, setPassword] = useState("");
@@ -19,6 +20,8 @@ function SignupPage() {
   const handleConfirmToggle = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible)
   }
+
+  Title("MonieFlex - Create MonieFlex Account")
 
   return (
     <div className="bg-stone-100 flex flex-col items-stretch">
@@ -94,11 +97,7 @@ function SignupPage() {
                 />
             </div>
           </div>
-          <div 
-            className="w-[51%] max-md:w-full bg-cover bg-center" 
-            style={{ 
-                backgroundImage:`url(${Assets.signup})` 
-            }}></div>
+          <img src={ Assets.signup } alt="Signup" />
         </div>
       </div>
     </div>
