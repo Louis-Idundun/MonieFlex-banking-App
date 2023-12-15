@@ -61,7 +61,7 @@ function LoginPage() {
                                 onValueChanged={() => {}}
                             />
                             <Link 
-                                to={"/forgot"}
+                                to={ OurRoutes.forgotPassword }
                                 className="text-zinc-800 text-center text-xls whitespace-nowrap mt-2 
                                 self-end max-md:mr-2.5"
                                 style={{ fontFamily: 'Urbanist' }}
