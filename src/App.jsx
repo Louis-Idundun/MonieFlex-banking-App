@@ -1,10 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {SnackbarProvider} from "notistack";
-<<<<<<< HEAD
 import TransferPage from  "./pages/home/transfer/TransferPage"
-=======
 import DashboardPage from "./pages/home/dashboard/DashboardPage"
->>>>>>> 48ef68bcdb14341a650eb9a4d60fad34e1726eaa
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import OurRoutes from "./commons/OurRoutes"
@@ -21,12 +18,8 @@ function App() {
                   <Route path={ OurRoutes.signup } element={ <SignupPage /> } />
                   <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
                   <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
-
-<<<<<<< HEAD
                   <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
-=======
                   <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
->>>>>>> 48ef68bcdb14341a650eb9a4d60fad34e1726eaa
               </Routes>
           </BrowserRouter>
       </>
