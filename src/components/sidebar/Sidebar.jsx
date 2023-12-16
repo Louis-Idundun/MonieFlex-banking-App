@@ -12,7 +12,12 @@ export const Sidebar = () => {
     }
 
     return (
-        <div className="rounded-none border-r-neutral-200 border-r border-solid h-screen flex flex-col justify-between">
+        <div 
+            className="rounded-none border-r-neutral-200 border-r border-solid h-screen flex flex-col justify-between" 
+            style={{
+                backgroundColor: "#F6F0FF"
+            }}
+        >
             <div>{
                 SideNavItems.map((item, index) => {
                     return <MenuItem key={index} item={item} />
