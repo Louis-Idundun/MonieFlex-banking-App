@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {SnackbarProvider} from "notistack";
 import AirtimePurchasePage from "./pages/home/airtime-purchase/AirtimePage";
+import DashboardPage from "./pages/home/dashboard/DashboardPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import OurRoutes from "./commons/OurRoutes"
@@ -19,6 +20,7 @@ function App() {
                   <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
 
                   <Route path={ OurRoutes.airtime } element={ <AirtimePurchasePage /> } />
+                  <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
               </Routes>
           </BrowserRouter>
       </>
