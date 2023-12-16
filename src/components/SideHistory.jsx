@@ -6,7 +6,6 @@ const HistoryItem = ({
     accountNumber = 123456789, needAvatar = true,
     isFlexed = false
 }) => {
-
     return (
         <div className="items-center flex justify-between gap-2.5 mt-5">
             { 

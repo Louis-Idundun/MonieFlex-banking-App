@@ -8,7 +8,6 @@ const Checkbox = ({ label = '', onValueChanged }) => {
         setState(!state)
         onValueChanged(state)
     }
-
     return (
         <div className="flex gap-2.5 mb-2 self-start items-center" style={{ alignItems: "center" }}>
             <div 

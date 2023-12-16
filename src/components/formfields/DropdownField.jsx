@@ -21,7 +21,7 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
     const hoverStyle = {
         backgroundColor: "#eff",
         borderRadius: "5px",
-        fontSize: "14px",
+        fontSize: "14px", 
         fontWeight: "500"
     }
  
