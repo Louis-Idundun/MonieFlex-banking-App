@@ -1,12 +1,27 @@
 import { Icon } from "@iconify/react";
 import Assets from "../../assets/Assets";
 import { useEffect, useState } from "react";
+import {Avatar, IconButton, Menu, MenuItem, Tooltip} from "@mui/material";
 
 function DashboardHeader(imageLink) {
     const [image, setImage] = useState(Assets.avatar);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
     useEffect(() => {
-        setImage(typeof imageLink === 'string' && imageLink !== '' ? imageLink : Assets.avatar)
+        setImage(
+            typeof imageLink === 'string' && imageLink !== ''
+                ? imageLink
+                : Assets.avatar
+        )
     }, [imageLink]);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <header className="justify-between items-stretch bg-sky-950 flex gap-5 px-20 py-2.5 max-md:flex-wrap max-md:px-5" style={{
@@ -30,13 +45,28 @@ function DashboardHeader(imageLink) {
                 <div className="text-white text-center text-base font-semibold tracking-wide self-center my-auto">
                     Help
                 </div>
-                <img
-                    loading="lazy"
-                    srcSet= { image.toString() }
-                    className="aspect-square object-contain object-center w-[50px] overflow-hidden shrink-0 max-w-full rounded-[50%]"
-                    alt="Profile"
-                />
+                <Tooltip title="Account settings">
+                    <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                    >
+                        <Avatar sx={{ width: 50, height: 50 }} src= { image.toString() }/>
+                    </IconButton>
+                </Tooltip>
             </div>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleClose}>View Profile</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
         </header>
     );
 }

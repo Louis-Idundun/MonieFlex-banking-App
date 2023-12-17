@@ -70,7 +70,7 @@ function TransactionHistory() {
   
       setCreditTransactions(creditRecords);
       setDebitTransactions(debitRecords);
-    }, [ listOfTransactions ]);
+    }, [ ]);
 
     const handleClick = (key) => {
         setActive(key)
