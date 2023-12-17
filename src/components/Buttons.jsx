@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 export function Button({text = '', onClick, isWhite = true}) {
     const style = {
         color: isWhite ? "#fff" : "#2e2e2e",
-        fontFamily: 'Urbanist'
+        fontFamily: 'Urbanist',
+        fontSize: "16px"
     }
     return (
         <>

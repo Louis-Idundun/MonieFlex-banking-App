@@ -1,5 +1,5 @@
 import * as React from "react";
-
+ 
 function NarrationFormField ({
     placeHolder = 'Add note',
     id = 'note',
@@ -15,5 +15,5 @@ function NarrationFormField ({
         />
     );
 }
-
+ 
 export default NarrationFormField;

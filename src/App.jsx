@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {SnackbarProvider} from "notistack";
+import AirtimePurchasePage from "./pages/home/airtime-purchase/AirtimePage";
 import TransferPage from  "./pages/home/transfer/TransferPage"
 import DashboardPage from "./pages/home/dashboard/DashboardPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
@@ -18,6 +19,8 @@ function App() {
                   <Route path={ OurRoutes.signup } element={ <SignupPage /> } />
                   <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
                   <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
+                  
+                  <Route path={ OurRoutes.airtime } element={ <AirtimePurchasePage /> } />
                   <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
                   <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
               </Routes>

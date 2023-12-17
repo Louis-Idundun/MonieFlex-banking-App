@@ -1,7 +1,11 @@
 import { Icon } from "@iconify/react"
 import { useState } from "react"
 
-const HistoryItem = ({firstName = '', lastName = '', accountNumber = 123456789, needAvatar = true}) => {
+const HistoryItem = ({
+    firstName = '', lastName = '', 
+    accountNumber = 123456789, needAvatar = true,
+    isFlexed = false
+}) => {
     return (
         <div className="items-center flex justify-between gap-2.5 mt-5">
             { 
@@ -11,17 +15,29 @@ const HistoryItem = ({firstName = '', lastName = '', accountNumber = 123456789, 
                 > { firstName.charAt(0) }{ lastName.charAt(0) } </div> 
                 : null 
             }
-            <div className="justify-center items-stretch self-stretch flex grow basis-[0%] flex-col">
-                <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
-                    {firstName} {lastName}
+            {
+                isFlexed ? <div className="justify-between items-center self-stretch flex grow">
+                    <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
+                        { accountNumber }
+                    </div>
+                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap" style={{color: "#08284E"}}>
+                        { firstName }
+                    </div>
+                </div> : <div className="justify-center items-stretch self-stretch flex grow basis-[0%] flex-col">
+                    <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
+                        {firstName} {lastName}
+                    </div>
+                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{accountNumber}</div>
                 </div>
-                <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{accountNumber}</div>
-            </div>
+            }
         </div>
     )
 }
 
-function SideHistory({title = '', history = [{firstName: '', lastName: '', accountNumber: 3197080844}]}) {
+function SideHistory({
+    title = '', needAvatar = true, isFlexed = false,
+    history = [{firstName: '', lastName: '', accountNumber: 3197080844}]
+}) {
     const [ open, setOpen ] = useState(false)
     const handleClick = () => {
         setOpen(!open)
@@ -34,7 +50,7 @@ function SideHistory({title = '', history = [{firstName: '', lastName: '', accou
                     { title.toUpperCase() }
                 </div>
                 <div className="flex gap-5 items-center">
-                    <div className={`${open ? "rotate-180" : ""}`} onClick={handleClick} style={{ cursor: "pointer" }}>
+                    <div className={`${open ? "rotate-180" : ""}`} onClick={handleClick}>
                         <Icon icon="iconamoon:arrow-up-2-light" height={"20px"} width={'20px'}/>
                     </div>
                     <Icon icon="solar:settings-bold-duotone" height={"20px"} width={'20px'}/>
@@ -43,10 +59,12 @@ function SideHistory({title = '', history = [{firstName: '', lastName: '', accou
             {
                 open ? history.map((item, key) => {
                     return <HistoryItem 
-                        key={key}
-                        firstName={item.firstName}
-                        lastName={item.lastName}
-                        accountNumber={item.accountNumber}
+                        key={ key }
+                        needAvatar={ needAvatar }
+                        isFlexed={ isFlexed }
+                        firstName={ item.firstName }
+                        lastName={ item.lastName }
+                        accountNumber={ item.accountNumber }
                     />
                 }) : null
             }

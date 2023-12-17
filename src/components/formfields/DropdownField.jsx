@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Icon } from "@iconify/react";
-
+ 
 function DropdownField({placeHolder = '', list = [], onSelected}) {
     const [ open, setOpen ] = React.useState(false);
     const [ text, setText ] = React.useState(placeHolder)
     const [ index, setIndex ] = React.useState(-1)
-
+ 
     const handleOpenList = () => {
         setOpen(!open)
     }
@@ -17,14 +17,14 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
     const handleHover = (key) => {
         setIndex(key)
     }
-
+ 
     const hoverStyle = {
         backgroundColor: "#eff",
         borderRadius: "5px",
         fontSize: "14px", 
         fontWeight: "500"
     }
-
+ 
     return (
         <>
             <div
@@ -57,5 +57,5 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
         </>
     );
 }
-
+ 
 export default DropdownField;
