@@ -1,5 +1,5 @@
 import { SideNavItems } from "./SidebarContents";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as React from "react";
 import {Icon} from "@iconify/react";
@@ -12,12 +12,7 @@ export const Sidebar = () => {
     }
 
     return (
-        <div 
-            className="rounded-none border-r-neutral-200 border-r border-solid h-screen flex flex-col justify-between" 
-            style={{
-                backgroundColor: "#F6F0FF"
-            }}
-        >
+        <div className="rounded-none border-r-neutral-200 border-r border-solid flex flex-col justify-between">
             <div>{
                 SideNavItems.map((item, index) => {
                     return <MenuItem key={index} item={item} />
@@ -73,21 +68,31 @@ export const Sidebar = () => {
 export const MenuItem = ({item}) => {
     const [ isSubOpen, setIsSubOpen ] = useState(false);
     const [ isHover, setIsHovered ] = useState(false)
+    const [ hoverSub, setHoverSub ] = useState("")
 
     const params = useLocation();
 
     const toggleSubMenu = () => {
-        if(isSubOpen) {
-            setIsSubOpen(false)
-        } else {
+        setIsSubOpen(!isSubOpen)
+    }
+
+    useEffect(() => {
+        if(params.pathname.includes(OurRoutes.bill)) {
             setIsSubOpen(true)
         }
-    }
+    }, [ params.pathname ]);
     const handleHovered = () => {
         setIsHovered(true);
     }
     const handleNotHovered = () => {
         setIsHovered(false);
+    }
+    const handleSubHover = (path) => {
+        setHoverSub(path)
+    }
+    const hoveredStyle = {
+        fontWeight: "bold",
+        fontColor: "#08284E"
     }
 
     if(item.subMenu) {
@@ -119,15 +124,17 @@ export const MenuItem = ({item}) => {
                     </div>
                 </button>
                 { isSubOpen && (
-                    <div className="flex flex-col space-y-4 mt-5 ml-8 content-start justify-start">
+                    <div className="flex flex-col space-y-4 mt-5 ml-8 mb-10 content-start justify-start">
                         {item.subMenuItems?.map((subItem, idx) => {
                             return (
                                 <Link
                                     key={idx}
                                     to={subItem.path}
+                                    onMouseEnter={() => handleSubHover(subItem.path)}
                                     className={`${
                                         subItem.path === params.pathname ? 'font-bold text-sky-950' : 'text-zinc-600'
                                     }`}
+                                    style={hoverSub === subItem.path ? hoveredStyle : null}
                                 >
                                     <span>{subItem.title}</span>
                                 </Link>

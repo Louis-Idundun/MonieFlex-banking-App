@@ -3,22 +3,25 @@ import { useState } from "react"
 
 const HistoryItem = ({
     firstName = '', lastName = '', 
-    accountNumber = 123456789, needAvatar = true,
+    number = 123456789, needAvatar = true,
     isFlexed = false
 }) => {
+    const flexedName = firstName.charAt(0) + firstName.charAt(0);
+    const name = firstName.charAt(0) + lastName.charAt(0);
+
     return (
         <div className="items-center flex justify-between gap-2.5 mt-5">
             { 
                 needAvatar ? <div 
                     className="text-black text-sm font-bold whitespace-nowrap justify-center bg-red-200"
                     style={{ padding: "10px", borderRadius: "50%" }}
-                > { firstName.charAt(0) }{ lastName.charAt(0) } </div> 
+                > { isFlexed ? flexedName : name } </div>
                 : null 
             }
             {
                 isFlexed ? <div className="justify-between items-center self-stretch flex grow">
                     <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
-                        { accountNumber }
+                        { number }
                     </div>
                     <div className="text-neutral-400 text-sm font-medium whitespace-nowrap" style={{color: "#08284E"}}>
                         { firstName }
@@ -27,7 +30,7 @@ const HistoryItem = ({
                     <div className="text-zinc-800 text-base font-semibold whitespace-nowrap">
                         {firstName} {lastName}
                     </div>
-                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{accountNumber}</div>
+                    <div className="text-neutral-400 text-sm font-medium whitespace-nowrap">{number}</div>
                 </div>
             }
         </div>
@@ -36,9 +39,9 @@ const HistoryItem = ({
 
 function SideHistory({
     title = '', needAvatar = true, isFlexed = false,
-    history = [{firstName: '', lastName: '', accountNumber: 3197080844}]
+    history = [{firstName: '', lastName: '', number: 3197080844}]
 }) {
-    const [ open, setOpen ] = useState(false)
+    const [ open, setOpen ] = useState(true)
     const handleClick = () => {
         setOpen(!open)
     }
@@ -64,7 +67,7 @@ function SideHistory({
                         isFlexed={ isFlexed }
                         firstName={ item.firstName }
                         lastName={ item.lastName }
-                        accountNumber={ item.accountNumber }
+                        number={ item.number }
                     />
                 }) : null
             }

@@ -1,5 +1,5 @@
 import * as React from "react";
- 
+
 function TextFormField({
     placeHolder = 'Type a placeholder',
     id = 'PlaceHolder',
@@ -28,5 +28,5 @@ function TextFormField({
         />
     );
 }
- 
+
 export default TextFormField;

@@ -1,9 +1,9 @@
 import * as React from "react";
- 
+
 function NarrationFormField ({
-    placeHolder = 'Add note',
-    id = 'note',
-    onValueChanged
+     placeHolder = 'Add note',
+     id = 'note',
+     onValueChanged
 }) {
     return (
         <textarea
@@ -15,5 +15,5 @@ function NarrationFormField ({
         />
     );
 }
- 
+
 export default NarrationFormField;
