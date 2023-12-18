@@ -27,42 +27,42 @@ function LoginPage() {
                     <div className="flex flex-col items-center justify-center items-stretch w-[49%] max-md:w-full max-md:ml-0">
                         <div className="shadow-sm bg-white flex grow flex-col w-full px-20 py-12 max-md:max-w-full max-md:px-5">
                             <p className="text-zinc-800 text-3xl font-bold tracking-wide text-left w-[500px] max-w-full mt-32 max-md:mt-10"
-                                style={{ 
-                                    width: '500px', color: '#2E2E2E', 
-                                    fontFamily: 'Urbanist', fontSize: '28px', 
-                                    fontStyle: 'normal', fontWeight: 700, 
-                                    lineHeight: 'normal', letterSpacing: '0.28px', 
+                                style={{
+                                    width: '500px', color: '#2E2E2E',
+                                    fontFamily: 'Urbanist', fontSize: '28px',
+                                    fontStyle: 'normal', fontWeight: 700,
+                                    lineHeight: 'normal', letterSpacing: '0.28px',
                                 }}
                             >
                                 LOGIN
                             </p>
-                            <p 
-                                className="text-neutral-400 text-left font-medium tracking-normal mt-1.5 
+                            <p
+                                className="text-neutral-400 text-left font-medium tracking-normal mt-1.5
                                     max-md:max-w-full"
-                                style={{ 
-                                    color: '#5B5B5B', fontFamily: 'Urbanist', 
-                                    fontSize: '16px', fontStyle: 'normal', 
-                                    fontWeight: 500, lineHeight: 'normal', 
-                                    letterSpacing: '0.16px' 
+                                style={{
+                                    color: '#5B5B5B', fontFamily: 'Urbanist',
+                                    fontSize: '16px', fontStyle: 'normal',
+                                    fontWeight: 500, lineHeight: 'normal',
+                                    letterSpacing: '0.16px'
                                 }} >
                                 Input your details below to login
                             </p>
-                            <AuthFormField 
-                                id="email" 
-                                title="Email Address" 
-                                type="number" 
+                            <AuthFormField
+                                id="email"
+                                title="Email Address"
+                                type="email"
                                 onValueChanged={() => {}}
                             />
                             <PasswordFormField
-                                id="password" 
-                                title="Password" 
-                                visible={visible} 
-                                onToggle={handleToggle} 
+                                id="password"
+                                title="Password"
+                                visible={visible}
+                                onToggle={handleToggle}
                                 onValueChanged={() => {}}
                             />
-                            <Link 
+                            <Link
                                 to={ OurRoutes.forgotPassword }
-                                className="text-zinc-800 text-center text-xls whitespace-nowrap mt-2 
+                                className="text-zinc-800 text-center text-xls whitespace-nowrap mt-2
                                 self-end max-md:mr-2.5"
                                 style={{ fontFamily: 'Urbanist' }}
                             >
@@ -77,10 +77,10 @@ function LoginPage() {
                                 <span className="text-sky-950">Privacy Policy</span>
                             </p>
                             <Button text="Login"/>
-                            <AuthLinkButton 
-                                isPurple={ false } 
-                                title="Open a MonieFlex Bank Account" 
-                                path={OurRoutes.signup} 
+                            <AuthLinkButton
+                                isPurple={ false }
+                                title="Open a MonieFlex Bank Account"
+                                path={OurRoutes.signup}
                             />
                         </div>
                     </div>
