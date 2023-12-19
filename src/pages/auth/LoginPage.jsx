@@ -20,7 +20,7 @@ function LoginPage() {
     const [visible, setVisible] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate()
-    const { setToken } = useAuth()
+    const { setToken, setEmailAddress, setFirstName, setLastName } = useAuth()
 
     const handleToggle = () => {
         setVisible(!visible)
@@ -36,6 +36,9 @@ function LoginPage() {
             setIsLoading(false);
             if (response.data["statusCode"] === 200) {
                 SweetAlert(response.data["message"], "success")
+                setEmailAddress(response.data["data"]["emailAddress"])
+                setFirstName(response.data["data"]["firstName"])
+                setLastName(response.data["data"]["lastName"])
                 setToken(response.data["data"]["token"])
                 setInterval(() => navigate(OurRoutes.dashboard), 1000)
             } else {

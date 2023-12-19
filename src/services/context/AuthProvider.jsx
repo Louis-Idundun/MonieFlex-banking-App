@@ -5,6 +5,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [ token, setToken ] = useState(null);
+    const [ emailAddress, setEmailAddress ] = useState(null);
+    const [ firstName, setFirstName ] = useState(null);
+    const [ lastName, setLastName ] = useState(null);
 
     const saveToken = (token) => {
         setToken(token)
@@ -12,11 +15,38 @@ export const AuthProvider = ({ children }) => {
             secure: true
         })
     }
+
+    const saveEmailAddress = (emailAddress) => {
+        setEmailAddress(emailAddress)
+        Cookies.set("emailAddress", emailAddress, {
+            secure: true
+        })
+    }
+
+    const saveFirstName = (firstName) => {
+        setFirstName(firstName)
+        Cookies.set("firstName", firstName, {
+            secure: true
+        })
+    }
+
+    const saveLastName = (lastName) => {
+        setLastName(lastName)
+        Cookies.set("lastName", lastName, {
+            secure: true
+        })
+    }
     const logout = () => setToken(null)
 
     const contextValues = {
         token: token ?? Cookies.get("token"),
+        firstName: firstName ?? Cookies.get("firstName"),
+        lastName: lastName ?? Cookies.get("lastName"),
+        emailAddress: emailAddress ?? Cookies.get("emailAddress"),
         setToken: saveToken,
+        setEmailAddress: saveEmailAddress,
+        setLastName: saveLastName,
+        setFirstName: saveFirstName,
         logout,
     };
 
