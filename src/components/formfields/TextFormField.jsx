@@ -6,6 +6,7 @@ function TextFormField({
     type = 'number',
     isEnabled = true,
     required = true,
+    value,
     onValueChanged = (e) => {}
 }) {
     return (
@@ -21,6 +22,7 @@ function TextFormField({
             placeholder= { placeHolder }
             required={ required }
             disabled={ !isEnabled }
+            value={ value }
             onChange={e => {
                 console.log(e.target.value)
                 onValueChanged(e.target.value)
