@@ -16,7 +16,6 @@ const EmailSent = ({email = "", type = "SIGNUP"}) =>  {
             }
         })
     }
-
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="text-zinc-800 text-center text-base font-medium tracking-normal">
@@ -33,7 +32,7 @@ const EmailSent = ({email = "", type = "SIGNUP"}) =>  {
             <img
                 loading="lazy"
                 srcSet={ Assets.emailSent }
-                className="object-contain items-center object-center overflow-hidden 
+                className="object-contain items-center object-center overflow-hidden
                 self-center mt-8"
             />
             <div className="text-neutral-400 text-center text-base font-medium tracking-normal mt-6">
@@ -41,21 +40,19 @@ const EmailSent = ({email = "", type = "SIGNUP"}) =>  {
             </div>
             <button
                 onClick={handleResend}
-                className="text-zinc-800 text-center text-xl font-bold whitespace-nowrap 
-                    justify-center items-center bg-purple-300 self-center max-w-full mt-9 px-16 
+                className="text-zinc-800 text-center text-xl font-bold whitespace-nowrap
+                    justify-center items-center bg-purple-300 self-center max-w-full mt-9 px-16
                     py-4 rounded-md max-md:px-5"
             >
                 Resend email
             </button>
-            <Link 
+            <Link
                 to={ OurRoutes.login }
-                className="text-sky-950 text-center text-base font-medium 
+                className="text-sky-950 text-center text-base font-medium
                 underline self-center whitespace-nowrap mt-4">
                 Back to Login
             </Link>
         </div>
     );
 }
- 
 export default EmailSent
- 
