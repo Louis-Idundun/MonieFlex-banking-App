@@ -5,6 +5,7 @@ import NarrationFormField from "../../../components/formfields/NarrationFormFiel
 import { Button } from "../../../components/Buttons"
 import Checkbox from "../../../commons/Checkbox"
 import axios from "axios"
+import axiosConfig from "../../../services/api/axiosConfig";
 
 
 export const MonieFlexTransferForm = () => {
@@ -33,13 +34,13 @@ export const MonieFlexTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField 
-                id="MonieFlex" 
-                placeHolder="Description" 
+            <NarrationFormField
+                id="MonieFlex"
+                placeHolder="Description"
             />
             <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
-                <Button 
-                    text={ "Send Money" } 
+                <Button
+                    text={ "Send Money" }
                     isWhite={ false }
                 />
             </div>
@@ -130,13 +131,13 @@ export const OtherBanksTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField 
-                id="Other Banks" 
+            <NarrationFormField
+                id="Other Banks"
                 placeHolder="Description"
             />
             <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
-                <Button 
-                    text={ "Send Money" } 
+                <Button
+                    text={ "Send Money" }
                     isWhite={ false }
                     onClick={handleTransfer}
                 />
