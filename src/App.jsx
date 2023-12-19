@@ -9,11 +9,10 @@ import DataPage from "./pages/home/bills/data/DataPage"
 import ElectricityPage from "./pages/home/bills/electricity/ElectricityPage"
 import TVPage from "./pages/home/bills/tv/TVPage"
 import OurRoutes from "./commons/OurRoutes"
-// import LoginPage from "./pages/auth/LoginPage";
+import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import LoanPage from "./pages/home/loans/LoanPage";
 import CardPage from "./pages/home/cards/CardPage";
-import LoginPage from "./login";
 
 function App() {
     return (

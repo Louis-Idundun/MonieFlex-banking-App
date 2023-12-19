@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuth } from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 
 const BASE_URL = "http://localhost:8080/api/v1/";
 
@@ -10,7 +10,7 @@ export default axios.create({
     },
 })
 
-export const useAxios = () => {
+export const useAxiosWithAuth = () => {
     const { token } = useAuth();
 
     return axios.create({
