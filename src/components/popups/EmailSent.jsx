@@ -16,7 +16,6 @@ const EmailSent = ({email = "", type = "SIGNUP"}) =>  {
             }
         })
     }
- 
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="text-zinc-800 text-center text-base font-medium tracking-normal">
@@ -56,5 +55,4 @@ const EmailSent = ({email = "", type = "SIGNUP"}) =>  {
         </div>
     );
 }
- 
 export default EmailSent

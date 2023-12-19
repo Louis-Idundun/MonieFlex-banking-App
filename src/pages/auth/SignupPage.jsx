@@ -7,15 +7,57 @@ import { Button, AuthLinkButton } from "../../components/Buttons";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes"
 import Title from "../../commons/Title"
+import axiosConfig from "../../services/api/axiosConfig"
+import SweetAlert from "../../commons/SweetAlert" 
+import SweetPopup from "../../commons/SweetPopup"
+import EmailSent from "../../components/popups/EmailSent";
+
 
 function SignupPage() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [visible, setVisibile] = useState(true);
+  const [visible, setVisible] = useState(true);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [ loader, setLoader ] = useState(true)
+
+  const [email, setEmail] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState()
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [password, setPassword] = useState("")
+  const [bvn, setBvn] = useState()
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    await axiosConfig.post("/auth/signup", {
+      emailAddress: email, 
+      firstName: firstName, 
+      lastName: lastName, 
+      phoneNumber: phoneNumber, 
+      bvn: bvn, 
+      password: password, 
+      confirmPassword: confirmPassword
+    }).then((response) => {
+      setLoading(false)
+      if (response.data["statusCode"] === 200) {
+        setLoader(false)
+        setLoading(true)
+      }
+    }).catch((err) => {
+      console.log(err)
+      setLoading(false)
+      if(err?.code === "ERR_BAD_REQUEST") {
+        err?.response.data["data"].forEach(value => 
+          SweetAlert(value, "error")
+        )
+      } else {
+        SweetAlert(err?.message, "error")
+      }
+    });
+  }
 
   const handleToggle = () => {
-    setVisibile(!visible)
+    setVisible(!visible)
   }
   const handleConfirmToggle = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible)
@@ -26,6 +68,12 @@ function SignupPage() {
   return (
     <div className="bg-stone-100 flex flex-col items-stretch">
       <OnboardingHeader />
+      <SweetPopup 
+        open={loading} 
+        loaderElement={
+          loader ? null : <EmailSent email={email}/>
+        }
+      />
       <div className="w-full max-md:max-w-full">
         <div className="flex max-md:flex-col max-md:items-stretch">
           <div className="flex flex-col items-center justify-center items-stretch w-[49%] max-md:w-full max-md:ml-0">
@@ -51,45 +99,45 @@ function SignupPage() {
                     id="email" 
                     title="Email" 
                     type="email" 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setEmail(value)}
                 />
                 <AuthFormField 
                     id="firstName" 
                     title="First Name" 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setFirstName(value)}
                 />
                 <AuthFormField 
                     id="lastName" 
                     title="Last Name" 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setLastName(value)}
                 />
                 <AuthFormField 
                     id="phone" 
                     title="Phone Number" 
                     type="tel" 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setPhoneNumber(value)}
                 />
                 <AuthFormField 
                     id="bvn" 
                     title="BVN" 
                     type="number" 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setBvn(value)}
                 />
                 <PasswordFormField 
                     id="password" 
                     title="Password" 
                     visible={visible} 
                     onToggle={handleToggle} 
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setPassword(value)}
                 />
                 <PasswordFormField 
                     id="confirmpassword" 
                     title="Confirm Password" 
                     visible={confirmPasswordVisible} 
                     onToggle={handleConfirmToggle}
-                    onValueChanged={() => {}}
+                    onValueChanged={value => setConfirmPassword(value)}
                 />
-                <Button text="Sign Up"/>
+                <Button text="Sign Up" onClick={handleSubmit}/>
                 <AuthLinkButton 
                     isPurple={ true } 
                     title="I have a MonieFlex Account." 
