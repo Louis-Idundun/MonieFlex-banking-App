@@ -4,24 +4,65 @@ import OnboardingHeader from "../../components/headers/OnboardingHeader"
 import AuthFormField from "../../components/formfields/AuthFormField"
 import PasswordFormField from '../../components/formfields/PasswordFormField'
 import { Button, AuthLinkButton } from "../../components/Buttons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes";
 import Title from "../../commons/Title"
+import axios from "axios";
+import { useHistory } from "react-router-dom;"
+import SweetAlert from "../../commons/SweetAlert";
+
 
 function LoginPage() {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisibile] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const history = useHistory();
 
     const handleToggle = () => {
         setVisibile(!visible)
-    }
+    };
+
+    const handleLogin = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
+                email: email,
+                password: password,
+            });
+
+            console.log("Login success:", response.status);
+            if (response.data["statusCCode"] === 400) {
+                SweetAlert(response.data["message"], 'error'
+                )
+                return
+            } else {
+                console.log(response)
+                console.log(response.data["data"]["token"])
+                SweetAlert(
+                    response.data["message"],
+                    "success"
+                )
+                // navigate OuterRoutes.dashboard
+            }
+                return <Link to=" /dashboard">Dashboard</Link>
+            
+
+        } catch (error) {
+            console.error("Login error:", error);
+
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     Title("MonieFlex - Login to your account")
 
     return (
         <div className="bg-stone-100 flex flex-col items-stretch">
             <OnboardingHeader />
+            {/* <SweetPopup open={ /> */}
             <div className="w-full max-md:max-w-full">
                 <div className="flex max-md:flex-col max-md:items-stretch">
                     <div className="flex flex-col items-center justify-center items-stretch w-[49%] max-md:w-full max-md:ml-0">
@@ -76,7 +117,7 @@ function LoginPage() {
                                 <span className="text-neutral-400"> and </span>
                                 <span className="text-sky-950">Privacy Policy</span>
                             </p>
-                            <Button text="Login"/>
+                            <Button text="Login" onClick={handleLogin} />
                             <AuthLinkButton 
                                 isPurple={ false } 
                                 title="Open a MonieFlex Bank Account" 
