@@ -32,13 +32,13 @@ export const MonieFlexTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField 
-                id="MonieFlex" 
-                placeHolder="Description" 
+            <NarrationFormField
+                id="MonieFlex"
+                placeHolder="Description"
             />
             <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
-                <Button 
-                    text={ "Send Money" } 
+                <Button
+                    text={ "Send Money" }
                     isWhite={ false }
                 />
             </div>
@@ -80,13 +80,13 @@ export const OtherBanksTransferForm = () => {
                 placeHolder={"Amount"}
                 onValueChanged={e => handleAmountInput(e)}
             />
-            <NarrationFormField 
-                id="Other Banks" 
+            <NarrationFormField
+                id="Other Banks"
                 placeHolder="Description"
             />
             <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
-                <Button 
-                    text={ "Send Money" } 
+                <Button
+                    text={ "Send Money" }
                     isWhite={ false }
                 />
             </div>

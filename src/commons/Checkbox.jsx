@@ -10,7 +10,7 @@ const Checkbox = ({ label = '', onValueChanged }) => {
     }
     return (
         <div className="flex gap-2.5 mb-2 self-start items-center" style={{ alignItems: "center" }}>
-            <div 
+            <div
                 onClick={handleSelect}
                 style={{
                     width: "16px",
@@ -21,11 +21,11 @@ const Checkbox = ({ label = '', onValueChanged }) => {
                     backgroundColor: state ? "#08284E" : null,
                     color: "#fff"
                 }}
-            > { 
-                state ? <Icon icon="iconamoon:check-bold" width="12px" height="12px"/> : null
+            > {
+                state ? <Icon icon="iconamoon:check-bold" width="12px" height="12px"/> : <div></div>
             } </div>
-            <div 
-                for="checked-checkbox" 
+            <div
+                for="checked-checkbox"
                 className="text-sky-950 text-xs font-bold grow whitespace-nowrap"
             > { label } </div>
         </div>

@@ -15,30 +15,30 @@ import LoanPage from "./pages/home/loans/LoanPage";
 import CardPage from "./pages/home/cards/CardPage";
 
 function App() {
-  return (
-      <>
-          <SnackbarProvider />
-          <BrowserRouter>
-              <Routes>
-                  <Route path={ OurRoutes.login } element={ <LoginPage /> } />
-                  <Route path={ OurRoutes.signup } element={ <SignupPage /> } />
-                  <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
-                  <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
+    return (
+        <>
+            <SnackbarProvider />
+            <BrowserRouter>
+                <Routes>
+                    <Route path={ OurRoutes.login } element={ <LoginPage /> } />
+                    <Route path={ OurRoutes.signup } element={ <SignupPage /> } />
+                    <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
+                    <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
 
-                  <Route path={ OurRoutes.airtime } element={ <AirtimePurchasePage /> } />
-                  <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
-                  <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
+                    <Route path={ OurRoutes.airtime } element={ <AirtimePurchasePage /> } />
+                    <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
+                    <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
 
-                  <Route path={ OurRoutes.data } element={ <DataPage /> } />
-                  <Route path={ OurRoutes.electricity } element={ <ElectricityPage /> } />
-                  <Route path={ OurRoutes.tv } element={ <TVPage /> } />
+                    <Route path={ OurRoutes.data } element={ <DataPage /> } />
+                    <Route path={ OurRoutes.electricity } element={ <ElectricityPage /> } />
+                    <Route path={ OurRoutes.tv } element={ <TVPage /> } />
 
-                  <Route path={ OurRoutes.loan } element={ <LoanPage /> } />
-                  <Route path={ OurRoutes.card } element={ <CardPage /> } />
-              </Routes>
-          </BrowserRouter>
-      </>
-  );
+                    <Route path={ OurRoutes.loan } element={ <LoanPage /> } />
+                    <Route path={ OurRoutes.card } element={ <CardPage /> } />
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
 }
 
 export default App;
