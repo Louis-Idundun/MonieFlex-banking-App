@@ -4,24 +4,58 @@ import OnboardingHeader from "../../components/headers/OnboardingHeader"
 import AuthFormField from "../../components/formfields/AuthFormField"
 import PasswordFormField from '../../components/formfields/PasswordFormField'
 import { Button, AuthLinkButton } from "../../components/Buttons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Assets from "../../assets/Assets";
 import OurRoutes from "../../commons/OurRoutes";
 import Title from "../../commons/Title"
+import SweetAlert from "../../commons/SweetAlert";
+import SweetPopup from "../../commons/SweetPopup";
+import axiosConfig from "../../services/api/axiosConfig"
+import useAuth from "../../services/hooks/useAuth"
+
 
 function LoginPage() {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [visible, setVisibile] = useState(true);
+    const [visible, setVisible] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
+    const { setToken, setEmailAddress, setFirstName, setLastName } = useAuth()
 
     const handleToggle = () => {
-        setVisibile(!visible)
-    }
+        setVisible(!visible)
+    };
+
+    const handleLogin = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axiosConfig.post("/auth/login", {
+                emailAddress: email,
+                password: password,
+            });
+            setIsLoading(false);
+            if (response.data["statusCode"] === 200) {
+                SweetAlert(response.data["message"], "success")
+                setEmailAddress(response.data["data"]["emailAddress"])
+                setFirstName(response.data["data"]["firstName"])
+                setLastName(response.data["data"]["lastName"])
+                setToken(response.data["data"]["token"])
+                setInterval(() => navigate(OurRoutes.dashboard), 1000)
+            } else {
+                SweetAlert(response.data["message"], 'error')
+            }
+        } catch (error) {
+            setIsLoading(false);
+            console.error("Login error:", error);
+        }
+    };
 
     Title("MonieFlex - Login to your account")
 
     return (
         <div className="bg-stone-100 flex flex-col items-stretch">
             <OnboardingHeader />
+            <SweetPopup open={ isLoading } />
             <div className="w-full max-md:max-w-full">
                 <div className="flex max-md:flex-col max-md:items-stretch">
                     <div className="flex flex-col items-center justify-center items-stretch w-[49%] max-md:w-full max-md:ml-0">
@@ -51,14 +85,14 @@ function LoginPage() {
                                 id="email"
                                 title="Email Address"
                                 type="email"
-                                onValueChanged={() => {}}
+                                onValueChanged={e => setEmail(e)}
                             />
                             <PasswordFormField
                                 id="password"
                                 title="Password"
                                 visible={visible}
                                 onToggle={handleToggle}
-                                onValueChanged={() => {}}
+                                onValueChanged={e => setPassword(e)}
                             />
                             <Link
                                 to={ OurRoutes.forgotPassword }
@@ -76,11 +110,11 @@ function LoginPage() {
                                 <span className="text-neutral-400"> and </span>
                                 <span className="text-sky-950">Privacy Policy</span>
                             </p>
-                            <Button text="Login"/>
-                            <AuthLinkButton
-                                isPurple={ false }
-                                title="Open a MonieFlex Bank Account"
-                                path={OurRoutes.signup}
+                            <Button text="Login" onClick={handleLogin} />
+                            <AuthLinkButton 
+                                isPurple={ false } 
+                                title="Open a MonieFlex Bank Account" 
+                                path={OurRoutes.signup} 
                             />
                         </div>
                     </div>
