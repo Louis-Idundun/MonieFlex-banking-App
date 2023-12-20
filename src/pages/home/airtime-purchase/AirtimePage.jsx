@@ -4,23 +4,38 @@ import AccountBalance from "../../../components/AccountBalance"
 import Title from "../../../commons/Title"
 import SideHistory from "../../../components/SideHistory"
 import { AirtimeForm } from "./AirtimeForm"
- 
+import useAxiosWithAuth from "../../../services/hooks/useAxiosWithAuth"
+import { useEffect, useState } from "react"
+
 function AirtimePage() {
     Title("MonieFlex - Purchase Airtime")
- 
-    const history = [
+
+    const axios = useAxiosWithAuth()
+    const [history, setHistory] = useState([
       {
-        accountNumber: "08033208400",
-        firstName: "Adimonyemma",
-        lastName: "Evaristus"
-      },
-      {
-        accountNumber: "08033208400",
-        firstName: "Adimonyemma",
-        lastName: "Evaristus"
+        number: "",
+        firstName: ""
       }
-    ]
- 
+    ]);
+
+    useEffect(() => {
+      onLoad()
+    }, [])
+
+    async function onLoad() {
+      await axios.get("/wallet/history?page=0&size=10&type=AIRTIME")
+      .then((response) => {
+        console.log(response.data)
+        if(response.data["statusCode"] === 200) {
+          const mappedHistory = response.data["data"].map(transaction => ({
+            number: transaction.account,
+            firstName: transaction.receiver_name || ""
+          }));
+          setHistory(mappedHistory);
+        }
+      })
+    }
+
     return (
         <div style={{
           display: "grid",
@@ -41,8 +56,8 @@ function AirtimePage() {
               <AirtimeForm />
               <div style={{ marginRight: "30px", marginLeft: "40px" }}>
                 <AccountBalance />
-                <SideHistory 
-                  title={ "Frequent Beneficiaries" } 
+                <SideHistory
+                  title={ "Frequent Beneficiaries" }
                   history={ history }
                   isFlexed={ true }
                 />
@@ -52,7 +67,7 @@ function AirtimePage() {
       </div>
     )
 }
- 
+
 export default AirtimePage
 
 // import * as React from "react";
@@ -60,7 +75,7 @@ export default AirtimePage
 // import { Sidebar } from "../../components/sidebar/Sidebar"
 // import AirtimePurchaseForm from "../../components/AirtimePurchaseForm";
 // import AirtimeBalanceBeneficiary from "../../components/AirtmeBalanceBeneficiary";
- 
+
 // function AirtimePurchasePage() {
 //   return (
 //     <div className="bg-neutral-100 flex flex-col items-stretch">
@@ -75,5 +90,5 @@ export default AirtimePage
 //     </div>
 //   );
 // }
- 
+
 // export default AirtimePurchasePage;
