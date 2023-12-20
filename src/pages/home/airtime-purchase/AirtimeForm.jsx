@@ -7,7 +7,7 @@ import Checkbox from "../../../commons/Checkbox"
 import useAxiosWithAuth from "../../../services/hooks/useAxiosWithAuth"
 import SweetPopup from "../../../commons/SweetPopup"
 import SweetAlert from "../../../commons/SweetAlert"
-import { useNavigate } from "react-router-dom"
+import TransactionSuccess from "../../../components/popups/TransactionSuccess"
 
 
 export const AirtimeForm = () => {
@@ -17,12 +17,7 @@ export const AirtimeForm = () => {
     const [ beneficiary, setBeneficiary ] = useState("")
     const [ narration, setNarration ] = useState("")
     const [ loading, setLoading ] = useState(false)
-
-    const navigate = useNavigate();
-
-    const refreshPage = () => {
-        navigate(0);
-    }
+    const [ isSuccessElement, setSuccessElement ] = useState(false)
 
     const axios = useAxiosWithAuth()
 
@@ -39,8 +34,8 @@ export const AirtimeForm = () => {
             setLoading(false)
             if(response.data["statusCode"] === 200) {
                 SweetAlert(response.data["message"], 'success')
-                event.target.reset()
-                refreshPage()
+                setLoading(true)
+                setSuccessElement(true)
                 return
             } else {
                 SweetAlert(response.data["message"], 'error')
@@ -54,7 +49,9 @@ export const AirtimeForm = () => {
 
     return (
         <div>
-            <SweetPopup open={ loading }/>
+            <SweetPopup open={ loading } loaderElement={
+                isSuccessElement ? <TransactionSuccess /> : null
+            }/>
             <p style={{ paddingBottom: "20px", fontSize: "20px", fontWeight: "bold" }}>Airtime Purchases</p>
             <form onSubmit={handleAirtimePurchase}>
                 <DropdownField
