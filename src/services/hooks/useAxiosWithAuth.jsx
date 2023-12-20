@@ -6,14 +6,14 @@ import OurRoutes from "../../commons/OurRoutes"
 import { useEffect } from "react";
 
 const useAxiosWithAuth = () => {
-    const { auth } = useAuth();
+    const { token } = useAuth();
     const navigate = useNavigate()
 
     useEffect(() => {
         const requestIntercept = axiosConfig.interceptors.request.use(
             config => {
                 if (!config.headers['Authorization']) {
-                    config.headers['Authorization'] = `Bearer ${auth}`;
+                    config.headers['Authorization'] = `Bearer ${token}`;
                 }
                 return config;
             }, (error) => Promise.reject(error)
@@ -36,7 +36,7 @@ const useAxiosWithAuth = () => {
             axiosConfig.interceptors.request.eject(requestIntercept);
             axiosConfig.interceptors.response.eject(responseIntercept);
         }
-    }, [ auth, navigate ])
+    }, [ token, navigate ])
 
     return axiosConfig;
 }

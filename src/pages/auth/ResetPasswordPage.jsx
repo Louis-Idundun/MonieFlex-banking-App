@@ -1,16 +1,24 @@
 import PasswordFormField from "../../components/formfields/PasswordFormField";
 import OnboardingHeader from "../../components/headers/OnboardingHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {AuthLinkButton, Button} from "../../components/Buttons";
 import OurRoutes from "../../commons/OurRoutes";
 import Assets from "../../assets/Assets";
 import Title from "../../commons/Title"
+import { useLocation, useNavigate } from "react-router-dom";
+import axiosConfig from "../../services/api/axiosConfig";
+import SweetPopup from "../../commons/SweetPopup";
+import SweetAlert from "../../commons/SweetAlert";
 
 function ResetPasswordPage() {
     const [password, setPassword] = useState("")
+    const [ token, setToken ] = useState("")
     const [visible, setVisible] = useState(true)
+    const [ loading, setLoading ] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [confirmVisible, setConfirmVisible] = useState(true)
+    const params = useLocation()
+    const navigate = useNavigate()
 
     const handleToggle = () => {
         setVisible(!visible)
@@ -21,12 +29,32 @@ function ResetPasswordPage() {
     const suggestPassword = () => {
         let value = "";
         const CHARACTERS = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+~";
-        for(let i = 0; i < 8; i++) {
+        for(let i = 0; i < 12; i++) {
             value += CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length))
         }
-        console.log(value)
         setPassword(value)
         setConfirmPassword(value)
+    }
+
+    useEffect(() => {
+        const token = params.search.substring(7)
+        setToken(token)
+    }, [params.search])
+
+    const handleSubmit = async () => {
+        setLoading(true)
+        await axiosConfig.post(`/auth/reset-password?token=${token}`, {
+            newPassword: password,
+            confirmPassword: confirmPassword
+        }).then((response) => {
+            setLoading(false)
+            if (response.data["statusCode"] === 200) {
+                SweetAlert(response.data["message"], 'success')
+                setInterval(() => navigate(OurRoutes.login), 1000)
+            } else {
+                SweetAlert(response.data["message"], 'error')
+            }
+        }).catch((error) => { setLoading(false) })
     }
 
     Title("MonieFlex - Reset Your Password")
@@ -34,6 +62,7 @@ function ResetPasswordPage() {
     return (
         <div className="bg-stone-100 flex flex-col items-stretch">
             <OnboardingHeader />
+            <SweetPopup open={loading} />
             <div className="flex max-md:flex-col max-md:items-stretch">
                 <div className="flex flex-col items-center justify-center items-stretch w-[49%] max-md:w-full max-md:ml-0">
                     <div className="shadow-sm bg-white flex grow flex-col w-full px-20 py-12 max-md:max-w-full max-md:px-5">
@@ -82,7 +111,7 @@ function ResetPasswordPage() {
                             onValueChanged={e => setConfirmPassword(e)}
                             onToggle={handleConfirmToggle}
                         />
-                        <Button text={"Reset Password"} isWhite={true}/>
+                        <Button text={"Reset Password"} isWhite={true} onClick={handleSubmit}/>
                         <AuthLinkButton title={"Back to Login"} path={ OurRoutes.login }/>
                     </div>
                 </div>
