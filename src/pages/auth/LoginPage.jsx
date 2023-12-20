@@ -12,6 +12,7 @@ import SweetAlert from "../../commons/SweetAlert";
 import SweetPopup from "../../commons/SweetPopup";
 import axiosConfig from "../../services/api/axiosConfig"
 import useAuth from "../../services/hooks/useAuth"
+import { wait } from "@testing-library/user-event/dist/utils";
 
 
 function LoginPage() {
@@ -40,7 +41,8 @@ function LoginPage() {
                 setFirstName(response.data["data"]["firstName"])
                 setLastName(response.data["data"]["lastName"])
                 setToken(response.data["data"]["token"])
-                setInterval(() => navigate(OurRoutes.dashboard), 1000)
+                await wait(1000)
+                navigate(OurRoutes.dashboard)
             } else {
                 SweetAlert(response.data["message"], 'error')
             }
@@ -111,10 +113,10 @@ function LoginPage() {
                                 <span className="text-sky-950">Privacy Policy</span>
                             </p>
                             <Button text="Login" onClick={handleLogin} />
-                            <AuthLinkButton 
-                                isPurple={ false } 
-                                title="Open a MonieFlex Bank Account" 
-                                path={OurRoutes.signup} 
+                            <AuthLinkButton
+                                isPurple={ false }
+                                title="Open a MonieFlex Bank Account"
+                                path={OurRoutes.signup}
                             />
                         </div>
                     </div>

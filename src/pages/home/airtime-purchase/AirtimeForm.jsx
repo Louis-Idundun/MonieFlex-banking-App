@@ -4,56 +4,101 @@ import DropdownField from "../../../components/formfields/DropdownField"
 import NarrationFormField from "../../../components/formfields/NarrationFormField"
 import { Button } from "../../../components/Buttons"
 import Checkbox from "../../../commons/Checkbox"
+import useAxiosWithAuth from "../../../services/hooks/useAxiosWithAuth"
+import SweetPopup from "../../../commons/SweetPopup"
+import SweetAlert from "../../../commons/SweetAlert"
+import { useNavigate } from "react-router-dom"
 
 
 export const AirtimeForm = () => {
-    const [ inputAmount, setInputAmount ] = useState("")
+    const [ amount, setAmount ] = useState("")
+    const [ network, setNetwork ] = useState("")
+    const [ phoneNumber, setPhoneNumber ] = useState()
+    const [ beneficiary, setBeneficiary ] = useState("")
+    const [ narration, setNarration ] = useState("")
+    const [ loading, setLoading ] = useState(false)
 
-    const handleAmountInput = (input) => {
-        setInputAmount(`₦${input}`)
+    const navigate = useNavigate();
+
+    const refreshPage = () => {
+        navigate(0);
+    }
+
+    const axios = useAxiosWithAuth()
+
+    async function handleAirtimePurchase(event) {
+        event.preventDefault()
+        setLoading(true)
+        await axios.post("/bill/airtime", {
+            phone_number: `${ phoneNumber }`,
+            beneficiary_name: beneficiary,
+            network: network,
+            amount: amount,
+            narration: narration
+        }).then((response) => {
+            setLoading(false)
+            if(response.data["statusCode"] === 200) {
+                SweetAlert(response.data["message"], 'success')
+                event.target.reset()
+                refreshPage()
+                return
+            } else {
+                SweetAlert(response.data["message"], 'error')
+                return
+            }
+        }).catch((error) => {
+            setLoading(false)
+            console.log(error)
+        })
     }
 
     return (
         <div>
+            <SweetPopup open={ loading }/>
             <p style={{ paddingBottom: "20px", fontSize: "20px", fontWeight: "bold" }}>Airtime Purchases</p>
-            <DropdownField
-                placeHolder={"Select Network"}
-                list={[
-                    "MTN",
-                    "GLO",
-                    "AIRTEL",
-                    "9MOBILE"
-                ]}
-                onSelected={item => console.log(item)}
-            />
-            <TextFormField
-                id={'mobile_number'}
-                type={"number"}
-                placeHolder={"Mobile Number"}
-            />
-            <TextFormField
-                id={'amount'}
-                type={"number"}
-                value={ inputAmount }
-                placeHolder={"Amount"}
-                onValueChanged={e => handleAmountInput(e)}
-            />
-            <TextFormField
-                id={'beneficiary'}
-                type={"text"}
-                placeHolder={"Beneficiary Name"}
-            />
-            <Checkbox label="Save Beneficiary" onValueChanged={e => {}}/>
-            <NarrationFormField 
-                id="MonieFlex" 
-                placeHolder="Description" 
-            />
-            <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
-                <Button 
-                    text={ "Send Money" } 
-                    isWhite={ false }
+            <form onSubmit={handleAirtimePurchase}>
+                <DropdownField
+                    placeHolder={"Select Network"}
+                    list={[
+                        "MTN",
+                        "GLO",
+                        "AIRTEL",
+                        "9MOBILE"
+                    ]}
+                    onSelected={item => setNetwork(item)}
                 />
-            </div>
+                <TextFormField
+                    id={'mobile_number'}
+                    type={"tel"}
+                    placeHolder={"Mobile Number"}
+                    onValueChanged={e => setPhoneNumber(e)}
+                />
+                <TextFormField
+                    id={'amount'}
+                    type={"number"}
+                    placeHolder={"Amount"}
+                    onValueChanged={e => setAmount(e)}
+                />
+                <TextFormField
+                    id={'beneficiary'}
+                    type={"text"}
+                    placeHolder={"Beneficiary Name"}
+                    onValueChanged={e => setBeneficiary(e)}
+                />
+                <Checkbox label="Save Beneficiary" onValueChanged={e => {}}/>
+                <NarrationFormField
+                    id="MonieFlex"
+                    placeHolder="Description"
+                    onValueChanged={e => setNarration(e)}
+                />
+                <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
+                    <Button
+                        text={ "Send Money" }
+                        isWhite={ false }
+                        type="submit"
+                    />
+                </div>
+            </form>
         </div>
     )
 }
