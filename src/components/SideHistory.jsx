@@ -2,8 +2,8 @@ import { Icon } from "@iconify/react"
 import { useState } from "react"
 
 const HistoryItem = ({
-    firstName = '', lastName = '', 
-    number = 123456789, needAvatar = true,
+    firstName = '', lastName = '',
+    number = '', needAvatar = true,
     isFlexed = false
 }) => {
     const flexedName = firstName.charAt(0) + firstName.charAt(0);
@@ -11,12 +11,12 @@ const HistoryItem = ({
 
     return (
         <div className="items-center flex justify-between gap-2.5 mt-5">
-            { 
-                needAvatar ? <div 
+            {
+                needAvatar ? <div
                     className="text-black text-sm font-bold whitespace-nowrap justify-center bg-red-200"
                     style={{ padding: "10px", borderRadius: "50%" }}
                 > { isFlexed ? flexedName : name } </div>
-                : null 
+                : null
             }
             {
                 isFlexed ? <div className="justify-between items-center self-stretch flex grow">
@@ -39,7 +39,7 @@ const HistoryItem = ({
 
 function SideHistory({
     title = '', needAvatar = true, isFlexed = false,
-    history = [{firstName: '', lastName: '', number: 3197080844}]
+    history = [{firstName: '', lastName: '', number: ''}]
 }) {
     const [ open, setOpen ] = useState(true)
     const handleClick = () => {
@@ -61,7 +61,7 @@ function SideHistory({
             </div>
             {
                 open ? history.map((item, key) => {
-                    return <HistoryItem 
+                    return <HistoryItem
                         key={ key }
                         needAvatar={ needAvatar }
                         isFlexed={ isFlexed }

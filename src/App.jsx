@@ -13,6 +13,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import LoanPage from "./pages/home/loans/LoanPage";
 import CardPage from "./pages/home/cards/CardPage";
+import AuthenticatedRoute from "./services/AuthenticatedRoute";
 
 function App() {
     return (
@@ -25,16 +26,48 @@ function App() {
                     <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
                     <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
 
-                    <Route path={ OurRoutes.airtime } element={ <AirtimePurchasePage /> } />
-                    <Route path={ OurRoutes.transfer } element={ <TransferPage /> } />
-                    <Route path={ OurRoutes.dashboard } element={ <DashboardPage /> } />
+                    <Route path={ OurRoutes.airtime } element={
+                        <AuthenticatedRoute>
+                            <AirtimePurchasePage />
+                        </AuthenticatedRoute>
+                    } />
+                    <Route path={ OurRoutes.transfer } element={
+                        <AuthenticatedRoute>
+                            <TransferPage />
+                        </AuthenticatedRoute>
+                    } />
+                    <Route path={ OurRoutes.dashboard } element={
+                        <AuthenticatedRoute>
+                            <DashboardPage />
+                        </AuthenticatedRoute>
+                    } />
 
-                    <Route path={ OurRoutes.data } element={ <DataPage /> } />
-                    <Route path={ OurRoutes.electricity } element={ <ElectricityPage /> } />
-                    <Route path={ OurRoutes.tv } element={ <TVPage /> } />
+                    <Route path={ OurRoutes.data } element={
+                        <AuthenticatedRoute>
+                            <DataPage />
+                        </AuthenticatedRoute>
+                    } />
+                    <Route path={ OurRoutes.electricity } element={
+                        <AuthenticatedRoute>
+                            <ElectricityPage />
+                        </AuthenticatedRoute>
+                    } />
+                    <Route path={ OurRoutes.tv } element={
+                        <AuthenticatedRoute>
+                            <TVPage />
+                        </AuthenticatedRoute>
+                    } />
 
-                    <Route path={ OurRoutes.loan } element={ <LoanPage /> } />
-                    <Route path={ OurRoutes.card } element={ <CardPage /> } />
+                    <Route path={ OurRoutes.loan } element={
+                        <AuthenticatedRoute>
+                            <LoanPage />
+                        </AuthenticatedRoute>
+                    } />
+                    <Route path={ OurRoutes.card } element={
+                        <AuthenticatedRoute>
+                            <CardPage />
+                        </AuthenticatedRoute>
+                    } />
                 </Routes>
             </BrowserRouter>
         </>

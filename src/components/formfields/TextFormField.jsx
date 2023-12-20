@@ -24,7 +24,6 @@ function TextFormField({
             disabled={ !isEnabled }
             value={ value }
             onChange={e => {
-                console.log(e.target.value)
                 onValueChanged(e.target.value)
             }}
         />

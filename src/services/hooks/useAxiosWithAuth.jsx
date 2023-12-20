@@ -36,7 +36,7 @@ const useAxiosWithAuth = () => {
             axiosConfig.interceptors.request.eject(requestIntercept);
             axiosConfig.interceptors.response.eject(responseIntercept);
         }
-    }, [ auth, navigate ])
+    }, [ token, navigate ])
 
     return axiosConfig;
 }
