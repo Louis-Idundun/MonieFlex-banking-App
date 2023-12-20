@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Assets from "../../assets/Assets";
-
+ 
 import React from "react";
 import OurRoutes from "../../commons/OurRoutes";
-
+ 
 function TransactionSuccess() {
     return (
         <div className="items-center flex flex-col">
@@ -28,5 +28,5 @@ function TransactionSuccess() {
         </div>
     );
 }
-
+ 
 export default TransactionSuccess;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Icon } from "@iconify/react";
 
-function DropdownField({placeHolder = '', list = [], onSelected}) {
+function DropdownField({placeHolder = '', list = [], onSelected, isCustom = false}) {
     const [ open, setOpen ] = React.useState(false);
     const [ text, setText ] = React.useState(placeHolder)
     const [ index, setIndex ] = React.useState(-1)
@@ -10,7 +10,7 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
         setOpen(!open)
     }
     const handleSelect = (item) => {
-        setText(item)
+        isCustom ? setText(item.name) : setText(item)
         onSelected(item)
         setOpen(false)
     }
@@ -40,10 +40,20 @@ function DropdownField({placeHolder = '', list = [], onSelected}) {
             </div>
             {
                 open ? <div
-                    className="font-urbanist my-[20px] cursor-pointer
-                        top-9 min-w-full left-0 bg-[#EDEDED] rounded-md
-                    ">{
-                    list.map((item, key) => {
+                        className="font-urbanist my-[20px] cursor-pointer
+                            top-9 min-w-full left-0 bg-[#EDEDED] rounded-md
+                        "
+                        style={{ maxHeight: "500px", overflow: "auto" }}
+                    >{
+                    isCustom ? list.map((item, key) => {
+                        return <div
+                            key={key}
+                            onMouseEnter={() => handleHover(key)}
+                            onClick={() => handleSelect(item)}
+                            className="font-urbanist top-9 min-w-full left-0 z-10 px-4 py-2"
+                            style={index === key  ? hoverStyle : { fontSize: "14px", fontWeight: "500" }}
+                        >{ item.name }</div>
+                    }) : list.map((item, key) => {
                         return <div
                             key={key}
                             onMouseEnter={() => handleHover(key)}
