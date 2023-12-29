@@ -8,6 +8,7 @@ import useAxiosWithAuth from "../../../services/hooks/useAxiosWithAuth"
 import SweetAlert from "../../../commons/SweetAlert"
 import SweetPopup from "../../../commons/SweetPopup"
 import TransactionSuccess from "../../../components/popups/TransactionSuccess"
+import TransactionPin from "../../../components/popups/TransactionPin"
 
 
 export const MonieFlexTransferForm = () => {
@@ -63,6 +64,7 @@ export const OtherBanksTransferForm = () => {
     }])
     const [ loading, setLoading ] = useState(false)
     const [ isSuccess, setSuccess ] = useState(false)
+    const [ verifyPin, setVerifyPin ] = useState(false)
     const axios = useAxiosWithAuth()
 
     useEffect(() => {
@@ -101,8 +103,14 @@ export const OtherBanksTransferForm = () => {
         }
     }
 
-    async function handleTransfer(event) {
+    const handleTransferSubmit = (event) => {
         event.preventDefault()
+        setVerifyPin(true)
+        setLoading(true)
+    }
+
+    async function handleTransfer() {
+        setVerifyPin(false)
         setLoading(true)
         await axios.post("/wallet/transfer-to-bank", {
             bankCode: bankCode,
@@ -127,12 +135,25 @@ export const OtherBanksTransferForm = () => {
     
     return (
         <div style={{ paddingTop: "20px" }}>
-            <SweetPopup open={ loading } loaderElement={isSuccess ? <TransactionSuccess /> : null}/>
-            <form onSubmit={handleTransfer}>
+
+            <SweetPopup 
+                open={ loading } 
+                loaderElement={ 
+                    isSuccess ? <TransactionSuccess /> : verifyPin ? <TransactionPin 
+                        isVerifyTransaction={true}
+                        name={ accountName }
+                        amount={ amount }
+                        handleClose={() => setLoading(false)}
+                        callback={() => handleTransfer()}
+                    />  : null
+                }
+            />
+            <form onSubmit={handleTransferSubmit}>
                 <DropdownField
                     placeHolder={"Bank"}
                     list={ banks }
                     isCustom={ true }
+                    isSearchable={true}
                     onSelected={item => {
                         setBankCode(item.code)
                         setBankName(item.name)
@@ -164,6 +185,7 @@ export const OtherBanksTransferForm = () => {
                 />
                 <div className="flex grow flex-col w-full" style={{ width: "100%" }}>
                     <Button
+                        
                         text={ "Send Money" }
                         isWhite={ false }
                         type="submit"

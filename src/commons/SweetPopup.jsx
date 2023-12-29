@@ -2,13 +2,13 @@ import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Backdrop, Box, Fade, Modal } from "@mui/material";
 
-function SweetPopup({ open = true, handleClose, loaderElement }) {
+function SweetPopup({ open = true, handleClose, loaderElement, width = 400 }) {
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: width,
         bgcolor: 'background.paper',
         borderRadius: '24px',
         boxShadow: 24,

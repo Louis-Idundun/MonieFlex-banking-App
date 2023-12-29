@@ -39,7 +39,7 @@ export const QuickTransactions = () => {
             textColor: "#63243D"
         },
         {
-            name: "Artime Recharge",
+            name: "Airtime Recharge",
             icon: <Icon icon="bi:phone-fill" width="24" height="24"/>,
             link: OurRoutes.airtime,
             color: "bg-rose-50",
