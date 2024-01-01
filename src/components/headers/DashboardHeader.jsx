@@ -2,11 +2,17 @@ import { Icon } from "@iconify/react";
 import Assets from "../../assets/Assets";
 import { useEffect, useState } from "react";
 import {Avatar, IconButton, Menu, MenuItem, Tooltip} from "@mui/material";
+import SweetPopup from "../../commons/SweetPopup";
+import TransactionPin from "../popups/TransactionPin";
+
 
 function DashboardHeader(imageLink) {
     const [image, setImage] = useState(Assets.avatar);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [ showPin, setShowPin ] = useState(false)
+    
+   
 
     useEffect(() => {
         setImage(
@@ -21,7 +27,15 @@ function DashboardHeader(imageLink) {
     };
     const handleClose = () => {
         setAnchorEl(null);
+        setShowPin(false)
     };
+
+    const handlePinClick = () => {
+        handleClose()
+        setShowPin(true)
+    }
+   
+
 
     return (
         <header className="justify-between items-stretch bg-sky-950 flex gap-5 px-20 py-2.5 max-md:flex-wrap max-md:px-5" style={{
@@ -29,6 +43,7 @@ function DashboardHeader(imageLink) {
             top: "0",
             zIndex: "99",
         }}>
+            <SweetPopup open={ showPin } loaderElement={ <TransactionPin handleClose={handleClose}/> }/>
             <img
                 loading="lazy"
                 src={ Assets.logo }
@@ -66,6 +81,7 @@ function DashboardHeader(imageLink) {
             >
                 <MenuItem onClick={handleClose}>View Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handlePinClick}>Create Transaction Pin</MenuItem>
             </Menu>
         </header>
     );

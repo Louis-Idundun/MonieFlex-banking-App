@@ -14,6 +14,7 @@ import SignupPage from "./pages/auth/SignupPage";
 import LoanPage from "./pages/home/loans/LoanPage";
 import CardPage from "./pages/home/cards/CardPage";
 import AuthenticatedRoute from "./services/AuthenticatedRoute";
+import TransactionPin from "./components/popups/TransactionPin";
 
 function App() {
     return (
@@ -25,6 +26,8 @@ function App() {
                     <Route path={ OurRoutes.signup } element={ <SignupPage /> } />
                     <Route path={ OurRoutes.forgotPassword } element={ <ForgotPasswordPage /> } />
                     <Route path={ OurRoutes.resetPassword } element={ <ResetPasswordPage /> } />
+                    <Route path="/pin" element={<TransactionPin/> }/>
+                    
 
                     <Route path={ OurRoutes.airtime } element={
                         <AuthenticatedRoute>
